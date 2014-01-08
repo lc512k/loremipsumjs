@@ -8,23 +8,41 @@
 
 <body>
   300 chars
-  <div class="lorem-chars-300"></div>
+  <div data-lorem="300-chars"></div>
 
   10 words
-  <div class="lorem-words-10"></div>
+  <div data-lorem="10-words"></div>
 
-  5 paras
-  <div class="lorem-paras-3-xs"></div>
-  <div class="lorem-paras-3-s"></div>
-  <div class="lorem-paras-3-l"></div>
-  <div class="lorem-paras-3-xl"></div>
-  <div class="lorem-paras-3"></div>
+  3 paras
+  <div data-lorem="3-tiny-paras"></div>
+  <div data-lorem="3-short-paras"></div>
+  <div data-lorem="3-long-paras"></div>
+  <div data-lorem="3-huge-paras"></div>
 
-  <div class="lorem-bullets-5"></div>
-  <div class="lorem-bullets-5-xs"></div>
-  <div class="lorem-bullets-5-s"></div>
-  <div class="lorem-bullets-5-l"></div>
-  <div class="lorem-bullets-5-xl"></div>
+  5 bullets
+  <div data-lorem="5-tiny-bullets"></div>
+  <div data-lorem="5-short-bullets"></div>
+  <div data-lorem="5-long-bullets"></div>
+  <div data-lorem="5-huge-bullets"></div>
+
+  More
+  <!-- default -->
+  <div data-lorem="300-chars" data-lorem-start="random"></div>
+  <!-- starts with lorem ipsum -->
+  <div data-lorem="300-chars" data-lorem-start="lorem"></div>
+  <!-- default -->
+  <div data-lorem="300-chars" data-lorem-punct="true"></div>
+  <!-- all punctuation removed enforces title case -->
+  <div data-lorem="300-chars" data-lorem-punct="false"></div>
+
+  <!-- default. original -->
+  <div data-lorem="300-chars" data-lorem-case="sentence"></div>
+  <!-- all lower case -->
+  <div data-lorem="300-chars" data-lorem-case="lower"></div>
+  <!-- all upper case -->
+  <div data-lorem="300-chars" data-lorem-case="upper"></div>
+  <!-- all title case -->
+  <div data-lorem="300-chars" data-lorem-case="title"></div>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="js/jquery.loremipsum.js"></script>
