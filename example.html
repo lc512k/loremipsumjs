@@ -7,40 +7,42 @@
 </head>
 
 <body>
-  300 chars default (starts with uppercase, ends in period--replace last char with period. if second to last is space or comma, make it alpha)
-  <div lorem="lorem-chars-300"></div>
-  300 chars no-trail (replace last char with alpha if not)
-  <div lorem="lorem-chars-300 lorem-no-trail"></div>
+  300 chars
+  <div data-lorem="300-chars"></div>
 
+  10 words
+  <div data-lorem="10-words"></div>
 
-  10 words default (starts with uppercase, ends in period--replace last char with period. if second to last is space or comma, make it alpha)
-  <div lorem="lorem-words-10"></div>
-  10 words no-trail (if last char not alpha, remove)
-  <div lorem="lorem-words-10 lorem-no-trail"></div>
-  10 words random start(same as default, random start. if first letter is a space or comma, chose next)
-  <div lorem="lorem-words-10 lorem-random"></div>
-  10 words lowercase(same as default, all lowercase)
-  <div lorem="lorem-words-10 lorem-lowercase"></div>
-  10 words uppercase (same as default, all uppercase)
-  <div lorem="lorem-words-10 lorem-uppercase"></div>
-  10 words no punctuation (starts with uppercase, no comma or period anywhere)
-  <div lorem="lorem-words-10 lorem-alpha-only"></div>
+  3 paras
+  <div data-lorem="3-tiny-paras"></div>
+  <div data-lorem="3-short-paras"></div>
+  <div data-lorem="3-long-paras"></div>
+  <div data-lorem="3-huge-paras"></div>
 
-  5 paras
-  <div lorem="lorem-paras-3-xs"></div>
-  <div lorem="lorem-paras-3-s"></div>
-  <div lorem="lorem-paras-3-m"></div>
-  <div lorem="lorem-paras-3-l"></div>
-  <div lorem="lorem-paras-3-xl"></div>
-  <div lorem="lorem-paras-3"></div>
+  5 bullets
+  <div data-lorem="5-tiny-bullets"></div>
+  <div data-lorem="5-short-bullets"></div>
+  <div data-lorem="5-long-bullets"></div>
+  <div data-lorem="5-huge-bullets"></div>
 
-  5 bullets. Text is words in defaultm
-  <div lorem="lorem-bullets-5-xs"></div>
-  <div lorem="lorem-bullets-5-s"></div>
-  <div lorem="lorem-bullets-5-m"></div>
-  <div lorem="lorem-bullets-5-l"></div>
-  <div lorem="lorem-bullets-5-xl"></div>
-  <div lorem="lorem-bullets-5"></div>
+  More
+  <!-- default -->
+  <div data-lorem="300-chars" data-lorem-start="random"></div>
+  <!-- starts with lorem ipsum -->
+  <div data-lorem="300-chars" data-lorem-start="lorem"></div>
+  <!-- default -->
+  <div data-lorem="300-chars" data-lorem-punct="true"></div>
+  <!-- all punctuation removed enforces title case -->
+  <div data-lorem="300-chars" data-lorem-punct="false"></div>
+
+  <!-- default. original -->
+  <div data-lorem="300-chars" data-lorem-case="sentence"></div>
+  <!-- all lower case -->
+  <div data-lorem="300-chars" data-lorem-case="lower"></div>
+  <!-- all upper case -->
+  <div data-lorem="300-chars" data-lorem-case="upper"></div>
+  <!-- all title case -->
+  <div data-lorem="300-chars" data-lorem-case="title"></div>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="js/jquery.loremipsum.js"></script>
