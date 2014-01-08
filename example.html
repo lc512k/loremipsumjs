@@ -7,24 +7,40 @@
 </head>
 
 <body>
-  300 chars
-  <div class="lorem-chars-300"></div>
+  300 chars default (starts with uppercase, ends in period--replace last char with period. if second to last is space or comma, make it alpha)
+  <div lorem="lorem-chars-300"></div>
+  300 chars no-trail (replace last char with alpha if not)
+  <div lorem="lorem-chars-300 lorem-no-trail"></div>
 
-  10 words
-  <div class="lorem-words-10"></div>
+
+  10 words default (starts with uppercase, ends in period--replace last char with period. if second to last is space or comma, make it alpha)
+  <div lorem="lorem-words-10"></div>
+  10 words no-trail (if last char not alpha, remove)
+  <div lorem="lorem-words-10 lorem-no-trail"></div>
+  10 words random start(same as default, random start. if first letter is a space or comma, chose next)
+  <div lorem="lorem-words-10 lorem-random"></div>
+  10 words lowercase(same as default, all lowercase)
+  <div lorem="lorem-words-10 lorem-lowercase"></div>
+  10 words uppercase (same as default, all uppercase)
+  <div lorem="lorem-words-10 lorem-uppercase"></div>
+  10 words no punctuation (starts with uppercase, no comma or period anywhere)
+  <div lorem="lorem-words-10 lorem-alpha-only"></div>
 
   5 paras
-  <div class="lorem-paras-3-xs"></div>
-  <div class="lorem-paras-3-s"></div>
-  <div class="lorem-paras-3-l"></div>
-  <div class="lorem-paras-3-xl"></div>
-  <div class="lorem-paras-3"></div>
+  <div lorem="lorem-paras-3-xs"></div>
+  <div lorem="lorem-paras-3-s"></div>
+  <div lorem="lorem-paras-3-m"></div>
+  <div lorem="lorem-paras-3-l"></div>
+  <div lorem="lorem-paras-3-xl"></div>
+  <div lorem="lorem-paras-3"></div>
 
-  <div class="lorem-bullets-5"></div>
-  <div class="lorem-bullets-5-xs"></div>
-  <div class="lorem-bullets-5-s"></div>
-  <div class="lorem-bullets-5-l"></div>
-  <div class="lorem-bullets-5-xl"></div>
+  5 bullets. Text is words in defaultm
+  <div lorem="lorem-bullets-5-xs"></div>
+  <div lorem="lorem-bullets-5-s"></div>
+  <div lorem="lorem-bullets-5-m"></div>
+  <div lorem="lorem-bullets-5-l"></div>
+  <div lorem="lorem-bullets-5-xl"></div>
+  <div lorem="lorem-bullets-5"></div>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="js/jquery.loremipsum.js"></script>
