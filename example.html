@@ -2,15 +2,63 @@
 <html>
 
 <head>
-  <title>Test</title>
-  <LINK href="css/loremipsum.css" rel="stylesheet" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/loremipsum.css" rel="stylesheet">
+
+  <!-- Three word title. No punctuation by default-->
+  <title data-lorem="3-words" data-lorem-case="title" data-lorem-punct="none" data-lorem-start="random"></title>
 </head>
 
 <body>
+  <div class="jumbotron">
+    <div class="container">
+      <h1 data-lorem="3-words"></h1>
+      <p data-lorem="1-short-paras"></p>
+      <p>
+        <a class="btn btn-primary btn-lg" data-lorem="3-words"></a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 data-lorem="2-words"></h2>
+        <p data-lorem="1-short-paras"></p>
+        <p>
+          <a class="btn btn-default" href="#" data-lorem="2-words"></a>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h2 data-lorem="2-words"></h2>
+        <p data-lorem="1-short-paras"></p>
+        <p>
+          <a class="btn btn-default" href="#" data-lorem="2-words"></a>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h2 data-lorem="2-words"></h2>
+        <p data-lorem="300-chars"></p>
+        <p>
+          <a class="btn btn-default" href="#" data-lorem="2-words"></a>
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      <p>&copy; Company 2013</p>
+    </footer>
+  </div>
+
+  <!--
   300 chars
   <div data-lorem="300-chars"></div>
-
-  10 words
+  10 words. No punctuation (to activate punct, use class set to true)
   <div data-lorem="10-words"></div>
 
   3 paras
@@ -26,26 +74,28 @@
   <div data-lorem="5-huge-bullets"></div>
 
   More
-  <!-- default -->
+  default
   <div data-lorem="300-chars" data-lorem-start="random"></div>
-  <!-- starts with lorem ipsum -->
+  starts with lorem ipsum
   <div data-lorem="300-chars" data-lorem-start="lorem"></div>
-  <!-- default -->
+  default
   <div data-lorem="300-chars" data-lorem-punct="true"></div>
-  <!-- all punctuation removed enforces title case -->
+  all punctuation removed enforces title case
   <div data-lorem="300-chars" data-lorem-punct="false"></div>
 
-  <!-- default. original -->
+  default. original
   <div data-lorem="300-chars" data-lorem-case="sentence"></div>
-  <!-- all lower case -->
+  all lower case  punctuation removed by default
   <div data-lorem="300-chars" data-lorem-case="lower"></div>
-  <!-- all upper case -->
+  all upper case punctuation removed by default 
   <div data-lorem="300-chars" data-lorem-case="upper"></div>
-  <!-- all title case -->
+  all title case punctuation removed by default
   <div data-lorem="300-chars" data-lorem-case="title"></div>
-
+  -->
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="js/jquery.loremipsum.js"></script>
+
+  <script src="js/bootstrap.min.js"></script>
 </body>
 
 

@@ -31,63 +31,152 @@ $(function() {
     },
     htmlWrap: function(string, startTag, endTag) {
       return startTag + string + endTag;
+    },
+    switchCase: function(text, newTextCase) {
+      var result = text;
+      switch (newTextCase) {
+        case 'lower':
+          result = result.toLowerCase();
+          break;
+        case 'upper':
+          result = result.toUpperCase();
+          break;
+        case 'title':
+          result = this.toTitleCase(result.toLowerCase());
+          break;
+        case 'sentence':
+          result = this.toSentenceCase(result.toLowerCase());
+          break;
+        default:
+          result = result;
+          break;
+      }
+      return result;
+    },
+    tidyPunctuation: function(text) {
+      console.log('tidy before', text);
+      var result, firstChar, lastChar, punctuation;
+      result = text;
+      $.trim(result);
+      firstChar = result.charAt(0);
+      lastChar = result.charAt(result.length - 1);
+      punctuation = /[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g;
+      if (punctuation.test(firstChar)) {
+        result = result.substring(1, result.length - 1);
+      }
+      if (punctuation.test(lastChar)) {
+        result = result.substring(0, result.length - 2);
+      }
+      result += '.';
+      console.log('tidy after', result);
+      return result;
+
+    },
+    removePunctuation: function(text) {
+      var result;
+      /* remove punctuation */
+      result = text.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+      /* collapse extra white spaces */
+      result = result.replace(/\s{2,}/g, ' ');
+      return result;
+    },
+    toTitleCase: function(str) {
+      return str.replace(/\w\S*/g, function(txt) {
+        return str.charAt(0).toUpperCase() + txt.substr(1);
+      });
+    },
+    toSentenceCase: function(str) {
+      return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
     }
   };
   for (i = 0; i < $loremDivs.length; i++) {
-    var div, loremType, type, size, n, part, result, start, trail, j, randomStart, randomLength;
+    var div, loremType, type, size, n, part, result, startChar, startWord, startPara, j, randomStart, randomLength,
+      punct, textCase,
+      userPunct, userTextCase, userStart;
+
     div = $($loremDivs[i]);
-    //classes = div.prop('class').split(' ');
-    loremType = div.data('lorem'); //classes; //classes.find('lorem');
+    loremType = div.data('lorem');
     part = loremType.split('-');
 
-    console.log('parts', part)
-
     n = part[0];
-    type = part[1];
-    size = part[2];
+    if (part.length === 3) {
+      size = part[1];
+      type = part[2];
+    } else if (part.length === 2) {
+      type = part[1];
+    }
 
     result = '';
-    start = 0; //random unless start-with-lorem
-    trail = true; //param to remove trailin gperiod
-    //fuzzy. aprox num of chars. end on whole words
-    //title case, lower case, upper case...
+    startChar = Util.makeRandomInt(0, 1000);
+    startWord = Util.makeRandomInt(0, 100);
+    startPara = Util.makeRandomInt(0, 6);
 
-    console.log('n', n)
+    userPunct = div.data('loremPunct');
+    userTextCase = div.data('loremCase');
+    userStart = div.data('loremStart');
+
+    console.info('userTextCase', userTextCase, 'userPunct', userPunct, 'userStart', userStart);
+
     n = parseInt(n, 10);
-    console.log('n', n)
+
     if (n > 0) {
       switch (type) {
         case 'chars':
-          result = loremStrTemp.substring(start, n + start);
-          if (trail) {
-            result += '.'; //only if last char is a [a-z][A-Z], otherwise, new case
+          punct = userPunct ? userPunct : 'none';
+          textCase = userTextCase || 'sentence';
+
+          result = loremStrTemp.substring(startChar, n + startChar);
+
+          if (punct === 'all') {
+            result = Util.tidyPunctuation(result);
+          } else if (punct === 'none') {
+            result = Util.removePunctuation(result);
+          } else if (punct !== undefined) {
+            console.warn('Warning: attribute data-lorem-punct with value ', userPunct, ' is invalid');
           }
+          result = Util.switchCase(result, textCase);
           break;
         case 'words':
-          var numberOfWords = start + n;
-          result = Util.splitSliceJoin(numberOfWords, start); //loremStrTemp.split(' ').slice(start, n + start).join(' ');
+          var numberOfWords = startWord + n;
+
+          punct = userPunct ? userPunct : 'none';
+          textCase = userTextCase || 'sentence';
+
+          result = Util.splitSliceJoin(numberOfWords, startWord);
+
+          if (punct === 'all') {
+            result = Util.tidyPunctuation(result);
+          } else if (punct === 'none') {
+            result = Util.removePunctuation(result);
+          } else if (punct !== undefined) {
+            console.warn('Warning: attribute data-lorem-punct with value ', userPunct, ' is invalid');
+          }
+          result = Util.switchCase(result, textCase);
+
           break;
         case 'paras':
-          //allow for smaller paragraphs
-          //result = Util.htmlWrap(Util.splitSliceJoin(n, start, '\r', '</p><p>'), '<p>', '</p>');
-          var numberOfParagraphs, originalParagraph;
-          numberOfParagraphs = n;
+          var numberOfParagraphs;
+          numberOfParagraphs = n + startPara;
+
+          punct = userPunct ? userPunct : 'all';
+          textCase = userTextCase || 'sentence';
+
 
           switch (size) {
             case 'tiny':
-              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, start, '\r', '</p><p>', 100) + '</p>';
+              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, startPara, '\r', '.</p><p>', 100) + '.</p>';
               break;
             case 'short':
-              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, start, '\r', '</p><p>', 200) + '</p>';
+              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, startPara, '\r', '.</p><p>', 200) + '.</p>';
               break;
             case 'long':
-              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, start, '\r', '</p><p>', 350) + '</p>';
+              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, startPara, '\r', '.</p><p>', 350) + '.</p>';
               break;
             case 'huge':
-              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, start, '\r', '</p><p>') + '</p>';
+              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, startPara, '\r', '.</p><p>') + '.</p>';
               break;
             default:
-              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, start, '\r', '</p><p>', 350) + '</p>';
+              result = '<p>' + Util.splitSliceJoin(numberOfParagraphs, startPara, '\r', '.</p><p>', 350) + '.</p>';
               break;
           }
           break;
@@ -100,7 +189,7 @@ $(function() {
                 min = 2;
                 max = 3;
                 randomLength = Util.makeRandomInt(min, max, randomStart);
-                console.log('bullets small', randomLength, randomStart)
+                console.log('bullets small', randomLength, randomStart);
                 itemText = Util.splitSliceJoin(randomLength, randomStart);
                 result += Util.htmlWrap(Util.capitalizeFirstLetter(itemText), '<li>', '</li>');
               }
